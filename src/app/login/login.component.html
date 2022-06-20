@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 text-center full-height">
+            <img src="../../../assets/images/login-img.svg" width="80%">
+        </div>
+        <div class="col-md-6 login-side full-height">
+            <div class="login-card card">
+                <h4 class="text-center mb-4">Secure Login</h4>
+                <form [formGroup]="loginForm" (submit)="login()">
+                    <div class="form-group">
+                        <label for="username" id="username">User Name</label>
+                        <input class="form-control" type="text" formControlName="username" required>
+                        <span class="error-red">{{getError('username')}}!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" id="password">Password</label>
+                        <input class="form-control" type="password" formControlName="password" required>
+                        <span class="error-red">{{getError('password')}}!</span>
+                    </div>
+                   <button class="btn btn-primary my-5 login-btn">Logon</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

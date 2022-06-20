@@ -1,0 +1,73 @@
+<app-header></app-header>
+<app-filter-header></app-filter-header>
+<div class="main-grid">
+    <div class="row pt-2 m-0">
+        <div class="col-md-2 p-0">
+            <app-left-nav></app-left-nav>
+        </div>
+        <div class="col-md-10 p-0">
+            <div class="grid-table">
+                <div class="d-flex">
+                    <span class="result-list-count">About 7,686,925 results</span>
+                    <div class="right-move" *ngIf="selectedItems.size > 0">
+                        <ul class="grid-right-ul">
+                            <li (click)="moveToModify()"><img src="../../../assets/images/move-to-modify.svg"
+                                    class="move-to-modify-icon">Move To
+                                Modify</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid-bg">
+                    <table class="table table-striped grid">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                            id="flexCheckIndeterminate">
+                                        <label class="form-check-label" for="flexCheckIndeterminate"></label>
+                                    </div>
+                                </th>
+                                <th>MPI Link ID</th>
+                                <th>Source System ID</th>
+                                <th>Source System Last Updated</th>
+                                <th>Firstname</th>
+                                <th>Middle Name</th>
+                                <th>Lastname</th>
+                                <th>Suffix</th>
+                                <th>Date of Birth</th>
+                                <th>Gender</th>
+                                <th>SSN</th>
+                                <th>Address Type</th>
+                                <th>Address Line 1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of data">
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" [value]="item.linkId"
+                                            id="flexCheckIndeterminate" (change)="selectItem($event)">
+                                        <label class="form-check-label" for="flexCheckIndeterminate"></label>
+                                    </div>
+                                </td>
+                                <td>{{item.linkId}}</td>
+                                <td>{{item.systemId}}</td>
+                                <td>{{item.lastUpdatedOn}}</td>
+                                <td>{{item.firstName}}</td>
+                                <td>{{item.middleName}}</td>
+                                <td>{{item.lastName}}</td>
+                                <td>{{item.suffix}}</td>
+                                <td [ngClass]="{'text-blur': item.textBlur}">{{item.dob}}</td>
+                                <td>{{item.gender}}</td>
+                                <td [ngClass]="{'text-blur': item.textBlur}">{{item.ssn}}</td>
+                                <td>{{item.addressType}}</td>
+                                <td>{{item.addressline1}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

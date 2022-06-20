@@ -1,0 +1,36 @@
+.main-header{
+    background: #fff;
+    padding: 0.8rem 1.2rem;
+}
+.header-bars{
+    height: 13px;
+}
+.top-text-vert{
+    vertical-align: text-top;
+}
+.top-header-right{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: end;
+    display: flex;
+}
+.notifications-bell{
+    margin-right: 2.5rem;
+    position: relative;
+    align-self: center;
+}
+.notification-count{
+    background: red;
+    border-radius: 50px;
+    font-size: 11px;
+    color: #fff;
+    position: absolute;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    font-weight: 500;
+    left: 10px;
+    top: 1px;
+    cursor: pointer;
+}
