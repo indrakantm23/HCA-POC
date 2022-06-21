@@ -14,7 +14,7 @@ export class MainGridComponent implements OnInit {
     public commonApiService: CommonApiService
   ) {}
   selectedItems: any = new Set();
-  data: any = MOCK_DATA;
+  data: any;
   pageData: any;
 
   ngOnInit(): void {
@@ -65,12 +65,13 @@ export class MainGridComponent implements OnInit {
     this.commonApiService
       .getIdeitities(pagNumber, recordsPerPage, data)
       .subscribe((res) => {
-        console.log(res);
+        const { data, pageNumber, recordsCount, recordsPerPage }: any = res;
+        this.data = data;
       });
   }
 
   selectItem(event: any): void {
-    const value: number | string = Number(event.target.value);
+    const value = event.target.value;
     if (this.selectedItems.has(value)) {
       this.selectedItems.delete(value);
     } else {
@@ -79,9 +80,11 @@ export class MainGridComponent implements OnInit {
   }
 
   moveToModify(): void {
-    for (let i = 0; i < MOCK_DATA.length; i++) {
-      if (this.selectedItems.has(MOCK_DATA[i].linkId)) {
-        MODIFY_DATA.push(...MOCK_DATA.splice(i, 1));
+    let data = this.data;
+    for (let i = 0; i < data.length; i++) {
+      if (this.selectedItems.has(data[i].mpiLinkId)) {
+        MODIFY_DATA.push(data[i]);
+        data[i].hide = true;
       }
     }
   }

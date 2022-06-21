@@ -11,9 +11,7 @@ export class ModifiedRecordsComponent implements OnInit {
   public data: any = MODIFY_DATA;
   public selectedItems = new Set();
 
-  ngOnInit(): void {
-    console.log(MODIFY_DATA);
-  }
+  ngOnInit(): void {}
 
   selectItem(event: any, item: any): void {
     const value: number | string = Number(event.target.value);
