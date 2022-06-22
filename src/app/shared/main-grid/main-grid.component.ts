@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { MOCK_DATA, MODIFY_DATA } from "../mocks";
+import { MODIFY_DATA } from "../mocks";
 import { ApiCallService } from "../../services/api-call.service";
 import { CommonApiService } from "../../services/common-api.service";
+import { BODY_DATA } from "../../shared/constants";
 
 @Component({
   selector: "app-main-grid",
@@ -25,49 +26,17 @@ export class MainGridComponent implements OnInit {
   getIdentities() {
     const { pagNumber, recordsPerPage }: any =
       this.apiCallService.dashboardPagefilter.getValue();
-    const data = {
-      sources: [
-        {
-          name: "",
-          id: "",
-        },
-      ],
-      emails: [""],
-      addresses: [
-        {
-          line1: "",
-          line2: "",
-          city: "",
-          state: "",
-          postalCode: "",
-        },
-      ],
-      names: [
-        {
-          first: "",
-          middle: "",
-          last: "",
-          suffix: "",
-        },
-      ],
-      ssns: [""],
-      genders: [""],
-      dateOfBirths: [""],
-      phoneNumbers: [
-        {
-          number: "",
-          areaCode: "",
-          extension: "",
-          countryCode: "",
-        },
-      ],
-    };
+
     this.commonApiService
-      .getIdeitities(pagNumber, recordsPerPage, data)
+      .getIdeitities(pagNumber, recordsPerPage, BODY_DATA)
       .subscribe((res) => {
         const { data, pageNumber, recordsCount, recordsPerPage }: any = res;
         this.data = data;
       });
+  }
+
+  handleInputChange(searchKey: any) {
+    console.log(searchKey);
   }
 
   selectItem(event: any): void {

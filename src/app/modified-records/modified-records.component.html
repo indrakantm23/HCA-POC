@@ -9,20 +9,21 @@
             <div class="grid-table">
                 <div class="d-flex">
                     <h6 class="mb-0">Modify Records</h6>
-                    <div class="right-move" *ngIf="selectedItems.size > 0">
+                    <div class="right-move" *ngIf="selectedItems.size == 2">
                         <ul class="grid-right-ul">
-                            <li class="grid-border-right"><img src="../../../assets/images/link-icon.svg"
-                                    class="icon-size">Link</li>
-                            <li><img src="../../../assets/images/unlink-icon.svg" class="icon-size">Unlink
+                            <li class="grid-border-right" (click)="link()"><img
+                                    src="../../../assets/images/link-icon.svg" class="icon-size">Link</li>
+                            <li (click)="unlink()"><img src="../../../assets/images/unlink-icon.svg"
+                                    class="icon-size">Unlink
                             </li>
                         </ul>
                         <ul class="grid-right-ul me-0">
                             <li class="align-self-center grid-border-right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"><img src="../../../assets/images/merge-icon.svg"
-                                    class="icon-size1">Merge
+                                data-bs-target="#exampleModal" (click)="merge()"><img
+                                    src="../../../assets/images/merge-icon.svg" class="icon-size1">Merge
                             </li>
-                            <li class="align-self-center"><img src="../../../assets/images/unmerge-icon.svg"
-                                    class="icon-size2">Unmerge</li>
+                            <li class="align-self-center" (click)="unmerge()"><img
+                                    src="../../../assets/images/unmerge-icon.svg" class="icon-size2">Unmerge</li>
                         </ul>
                     </div>
                 </div>
@@ -55,7 +56,7 @@
                             <tr *ngFor="let item of data">
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" [value]="item.linkId"
+                                        <input class="form-check-input" type="checkbox" [value]="item.mpiLinkId"
                                             id="flexCheckIndeterminate" (change)="selectItem($event, item)">
                                         <label class="form-check-label" for="flexCheckIndeterminate"></label>
                                     </div>
@@ -120,7 +121,7 @@
                         <tr *ngFor="let item of data">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" [value]="item.linkId"
+                                    <input class="form-check-input" type="checkbox" [value]="item.mpiLinkId"
                                         id="flexCheckIndeterminate">
                                     <label class="form-check-label" for="flexCheckIndeterminate"></label>
                                 </div>

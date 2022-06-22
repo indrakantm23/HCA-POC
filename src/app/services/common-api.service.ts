@@ -7,6 +7,7 @@ import { AppSettingsService } from "./app.settings.service";
   providedIn: "root",
 })
 export class CommonApiService implements OnInit {
+  public loginURL;
   public IdentitiesURL;
   public linkURL;
   public unlinkURL;
@@ -15,6 +16,11 @@ export class CommonApiService implements OnInit {
   public deleteURL;
 
   constructor(public http: HttpClient, public appSettings: AppSettingsService) {
+    //********************** LOGIN STARTS *************************
+    this.loginURL =
+      appSettings.consultantApiBaseUrl + appSettings.ext.CoreData.auth.Login;
+    //********************** LOGIN STARTS *************************
+
     //********************** IDENTITY STARTS *************************
     this.IdentitiesURL =
       appSettings.consultantApiBaseUrl +
@@ -48,6 +54,10 @@ export class CommonApiService implements OnInit {
   }
 
   // *************** POST API *********************//
+  login(data: any) {
+    const cUrl = this.loginURL;
+    return this.http.post(cUrl, data);
+  }
   getIdeitities(pagNumber: number, recordsPerPage: number, data: any) {
     const cUrl = `${this.IdentitiesURL}?pagNumber=${pagNumber}&recordsPerPage=${recordsPerPage}`;
     return this.http.post(cUrl, data);

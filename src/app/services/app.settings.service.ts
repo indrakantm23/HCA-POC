@@ -11,7 +11,7 @@ export class AppSettingsService {
   public ext = {
     CoreData: {
       auth: {
-        Login: "",
+        Login: "login",
         LogOff: "",
       },
       Identities: {

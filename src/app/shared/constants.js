@@ -16,3 +16,41 @@ export const ErrorTypes = {
   INVALID: "INVALID",
   REQUIRED: "REQUIRED",
 };
+
+export const BODY_DATA = {
+  sources: [
+    {
+      name: "",
+      id: "",
+    },
+  ],
+  emails: [""],
+  addresses: [
+    {
+      line1: "",
+      line2: "",
+      city: "",
+      state: "",
+      postalCode: "",
+    },
+  ],
+  names: [
+    {
+      first: "",
+      middle: "",
+      last: "",
+      suffix: "",
+    },
+  ],
+  ssns: [""],
+  genders: [""],
+  dateOfBirths: [""],
+  phoneNumbers: [
+    {
+      number: "",
+      areaCode: "",
+      extension: "",
+      countryCode: "",
+    },
+  ],
+};
