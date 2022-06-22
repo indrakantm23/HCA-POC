@@ -25,7 +25,6 @@
     padding: 0 1rem;
 }
 .left-nav{
-    width: 220px;
     position: relative;
 }
 .grid-table{
@@ -56,6 +55,10 @@
     height: 13px;
     margin-right: 0.5rem;
     vertical-align: baseline;
+}
+.leftnav-btm-img{
+    width: 100%;
+    max-width: 200px;
 }
 .leftnav-active{
     background: #0077bd;
@@ -104,6 +107,8 @@
 .grid-bg{
     background: #fff;
     padding: 1rem;
+    max-height: 77vh;
+    overflow: auto;
 }
 .grid-border-right{
     border-right: 1.5px solid #C6D8EE;
