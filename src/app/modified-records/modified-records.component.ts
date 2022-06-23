@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MODIFY_DATA, MERGE_RECORDS } from "../shared/mocks";
 import { CommonApiService } from "../services/common-api.service";
+import { SharedService } from "../services/sharedService";
 
 @Component({
   selector: "app-modified-records",
@@ -8,7 +9,10 @@ import { CommonApiService } from "../services/common-api.service";
   styleUrls: ["./modified-records.component.scss"],
 })
 export class ModifiedRecordsComponent implements OnInit {
-  constructor(public commonApiService: CommonApiService) {}
+  constructor(
+    public commonApiService: CommonApiService,
+    public sharedService: SharedService
+  ) {}
   public data: any = MODIFY_DATA;
   public selectedItems = new Set();
 
@@ -34,16 +38,19 @@ export class ModifiedRecordsComponent implements OnInit {
     );
     const bodyData = {
       linkToSource: {
-        name: data[0].firstName,
-        id: data[0].mpiLinkId,
+        name: data[0].sourceName,
+        id: data[0].sourceSystemId,
       },
       source: {
-        name: data[1].firstName,
-        id: data[1].mpiLinkId,
+        name: data[1].sourceName,
+        id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.link(bodyData).subscribe((res) => {
-      console.log(res);
+      this.sharedService.showToast("Linked records successfully.");
+      this.data = this.data.filter(
+        (el: any) => !this.selectedItems.has(el.mpiLinkId)
+      );
     });
   }
 
@@ -53,16 +60,16 @@ export class ModifiedRecordsComponent implements OnInit {
     );
     const bodyData = {
       linkToSource: {
-        name: data[0].firstName,
-        id: data[0].mpiLinkId,
+        name: data[0].sourceName,
+        id: data[0].sourceSystemId,
       },
       source: {
-        name: data[1].firstName,
-        id: data[1].mpiLinkId,
+        name: data[1].sourceName,
+        id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.unlink(bodyData).subscribe((res) => {
-      console.log(res);
+      this.sharedService.showToast("Unlinked records successfully.");
     });
   }
 
@@ -72,16 +79,16 @@ export class ModifiedRecordsComponent implements OnInit {
     );
     const bodyData = {
       linkToSource: {
-        name: data[0].firstName,
-        id: data[0].mpiLinkId,
+        name: data[0].sourceName,
+        id: data[0].sourceSystemId,
       },
       source: {
-        name: data[1].firstName,
-        id: data[1].mpiLinkId,
+        name: data[1].sourceName,
+        id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.merge(bodyData).subscribe((res) => {
-      console.log(res);
+      this.sharedService.showToast("Merged records successfully.");
     });
   }
 
@@ -91,16 +98,16 @@ export class ModifiedRecordsComponent implements OnInit {
     );
     const bodyData = {
       linkToSource: {
-        name: data[0].firstName,
-        id: data[0].mpiLinkId,
+        name: data[0].sourceName,
+        id: data[0].sourceSystemId,
       },
       source: {
-        name: data[1].firstName,
-        id: data[1].mpiLinkId,
+        name: data[1].sourceName,
+        id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.unmerge(bodyData).subscribe((res) => {
-      console.log(res);
+      this.sharedService.showToast("Unmerged records successfully.");
     });
   }
 }

@@ -19,24 +19,35 @@ export class MainGridComponent implements OnInit {
   pageData: any;
 
   ngOnInit(): void {
-    this.getIdentities();
+    this.getIdentities(BODY_DATA);
     this.pageData = this.apiCallService.dashboardPagefilter.getValue();
   }
 
-  getIdentities() {
+  getIdentities(body?: any) {
     const { pagNumber, recordsPerPage }: any =
       this.apiCallService.dashboardPagefilter.getValue();
 
     this.commonApiService
-      .getIdeitities(pagNumber, recordsPerPage, BODY_DATA)
+      .getIdeitities(pagNumber, recordsPerPage, body)
       .subscribe((res) => {
         const { data, pageNumber, recordsCount, recordsPerPage }: any = res;
         this.data = data;
       });
   }
 
-  handleInputChange(searchKey: any) {
-    console.log(searchKey);
+  handleInputChange(search: any) {
+    const searchQuery: any = BODY_DATA;
+    if (search.filter) {
+      if (search.filter === "first") {
+        console.log("name");
+        searchQuery["names"][0][search.filter] = search.value;
+      } else {
+        console.log("in");
+        searchQuery[search.filter] = [search.value];
+      }
+    }
+    console.log(searchQuery);
+    this.getIdentities(searchQuery);
   }
 
   selectItem(event: any): void {

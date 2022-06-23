@@ -7,12 +7,16 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 })
 export class FilterHeaderComponent implements OnInit {
   constructor() {}
+  public filter: string = "";
   @Output() handleInputChange = new EventEmitter<any>();
 
   ngOnInit(): void {}
 
   handleChange(event: any): void {
     const value = event.target.value;
-    this.handleInputChange.emit(value);
+    this.handleInputChange.emit({ value, filter: this.filter });
+  }
+  changeFilter(event: any) {
+    this.filter = event.target.value;
   }
 }

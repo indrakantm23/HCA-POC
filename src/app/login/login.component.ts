@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { loginCreds, ErrorTypes } from "../shared/constants";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { CommonApiService } from "../services/common-api.service";
 import { AuthService } from "../services/auth.service";
+import { SharedService } from "../services/sharedService";
 
 @Component({
   selector: "app-login",
@@ -15,13 +17,18 @@ export class LoginComponent implements OnInit {
     private form: FormBuilder,
     private commonApiService: CommonApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private sharedService: SharedService,
+    private toast: MatSnackBar
   ) {}
   public loginForm!: FormGroup;
   private errorType: string = "";
 
   ngOnInit(): void {
     this.initLoginForm();
+    this.toast.open("message", "GOT IT", {
+      duration: 4000,
+    });
   }
 
   initLoginForm(): void {
@@ -34,22 +41,29 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.loginForm.valid) {
       const data = this.loginForm.value;
-      this.commonApiService.login(data).subscribe((res) => {
-        const {
-          expiration,
-          firstName,
-          lastName,
-          middleName,
-          roles,
-          token,
-        }: any = res;
-        if (token) {
-          this.authService.sendToken(firstName, lastName, token, roles);
-          this.router.navigate(["/user-grid"]);
-        } else {
-          console.log("Unable to login");
+      this.commonApiService.login(data).subscribe(
+        (res) => {
+          const {
+            expiration,
+            firstName,
+            lastName,
+            middleName,
+            roles,
+            token,
+          }: any = res;
+          if (token) {
+            this.authService.sendToken(firstName, lastName, token, roles);
+            this.router.navigate(["/user-grid"]);
+            this.sharedService.showToast("Logged in successfully");
+          }
+        },
+        (err) => {
+          const { error }: any = err;
+          if (error) {
+            this.sharedService.showToast(error);
+          }
         }
-      });
+      );
       // const {username, password}: any = data;
       //   if(loginCreds.USERNAME.has(username) && loginCreds.PASSWORD === password){
       //     // LOGIN SUCCESSFULL
