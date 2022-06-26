@@ -1,5 +1,5 @@
 <div class="left-nav">
-    <h6 class="hello-user">Hello, Smith <img src="../../../assets/images/hand-symbol.svg"></h6>
+    <h6 class="hello-user">Hello, {{getUserFirstName()}} <img src="../../../assets/images/hand-symbol.svg"></h6>
     <ul class="leftnav-ul">
         <a routerLink="/user-grid">
             <li routerLinkActive="leftnav-active">
@@ -32,7 +32,7 @@
             </li>
         </a>
     </ul>
-  
+
 </div>
 <div class="text-center">
     <img src="../../../assets/images/leftnav-bottom-img.svg" class="leftnav-btm-img">

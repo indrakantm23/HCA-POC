@@ -19,16 +19,13 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private sharedService: SharedService,
-    private toast: MatSnackBar
+    private _snackBar: MatSnackBar
   ) {}
   public loginForm!: FormGroup;
   private errorType: string = "";
 
   ngOnInit(): void {
     this.initLoginForm();
-    this.toast.open("message", "GOT IT", {
-      duration: 4000,
-    });
   }
 
   initLoginForm(): void {
@@ -79,6 +76,8 @@ export class LoginComponent implements OnInit {
       //   this.errorType = ErrorTypes.REQUIRED;
       //   console.log('PLEASE ENTER USERNAME & PASSWORD')
       // }
+    } else {
+      this.sharedService.showToast("Please enter username and password");
     }
   }
 

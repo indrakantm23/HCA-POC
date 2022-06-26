@@ -10,8 +10,11 @@ export class SharedService {
   ngOnInit() {}
 
   showToast(message: string) {
-    this.toast.open(message, "GOT IT", {
-      duration: 4000,
-    });
+    let x = document.getElementById("snackbar") as HTMLElement;
+    x.innerHTML = message;
+    x.className = "show";
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 4000);
   }
 }

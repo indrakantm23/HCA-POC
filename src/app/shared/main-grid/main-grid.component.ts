@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MODIFY_DATA } from "../mocks";
 import { ApiCallService } from "../../services/api-call.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { CommonApiService } from "../../services/common-api.service";
 import { BODY_DATA } from "../../shared/constants";
 
@@ -12,7 +13,8 @@ import { BODY_DATA } from "../../shared/constants";
 export class MainGridComponent implements OnInit {
   constructor(
     public apiCallService: ApiCallService,
-    public commonApiService: CommonApiService
+    public commonApiService: CommonApiService,
+    private _snackBar: MatSnackBar
   ) {}
   selectedItems: any = new Set();
   data: any;
@@ -21,6 +23,9 @@ export class MainGridComponent implements OnInit {
   ngOnInit(): void {
     this.getIdentities(BODY_DATA);
     this.pageData = this.apiCallService.dashboardPagefilter.getValue();
+    this._snackBar.open("message", "action", {
+      duration: 400000,
+    });
   }
 
   getIdentities(body?: any) {

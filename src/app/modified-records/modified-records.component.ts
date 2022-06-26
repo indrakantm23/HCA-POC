@@ -24,9 +24,11 @@ export class ModifiedRecordsComponent implements OnInit {
       return;
     } else {
       if (this.selectedItems.has(value)) {
+        console.log("it has");
         this.selectedItems.delete(value);
       } else {
         this.selectedItems.add(value);
+        console.log("doesnt have");
         MERGE_RECORDS.push(item);
       }
     }

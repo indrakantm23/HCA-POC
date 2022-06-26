@@ -12,6 +12,9 @@ import { LoginComponent } from "./login/login.component";
 import { MaterialModule } from "./shared/material/material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModifiedRecordsComponent } from "./modified-records/modified-records.component";
+("@angular/platform-browser/animations");
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -24,13 +27,15 @@ import { ModifiedRecordsComponent } from "./modified-records/modified-records.co
     ModifiedRecordsComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
+    BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
     HttpClientModule,
-    MaterialModule,
-    BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatButtonModule,
+    MatSnackBarModule,
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent],
