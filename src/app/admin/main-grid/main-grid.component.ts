@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { MODIFY_DATA } from "../mocks";
+import { MODIFY_DATA } from "../../shared/mocks";
 import { ApiCallService } from "../../services/api-call.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { CommonApiService } from "../../services/common-api.service";
 import { BODY_DATA } from "../../shared/constants";
+import { SharedService } from "src/app/services/sharedService";
 
 @Component({
   selector: "app-main-grid",
@@ -14,7 +14,7 @@ export class MainGridComponent implements OnInit {
   constructor(
     public apiCallService: ApiCallService,
     public commonApiService: CommonApiService,
-    private _snackBar: MatSnackBar
+    public sharedService: SharedService
   ) {}
   selectedItems: any = new Set();
   data: any;
@@ -22,10 +22,6 @@ export class MainGridComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIdentities(BODY_DATA);
-    this.pageData = this.apiCallService.dashboardPagefilter.getValue();
-    this._snackBar.open("message", "action", {
-      duration: 400000,
-    });
   }
 
   getIdentities(body?: any) {
@@ -56,7 +52,7 @@ export class MainGridComponent implements OnInit {
   }
 
   selectItem(event: any): void {
-    const value = event.target.value;
+    const value = Number(event.target.value);
     if (this.selectedItems.has(value)) {
       this.selectedItems.delete(value);
     } else {
@@ -67,10 +63,11 @@ export class MainGridComponent implements OnInit {
   moveToModify(): void {
     let data = this.data;
     for (let i = 0; i < data.length; i++) {
-      if (this.selectedItems.has(data[i].mpiLinkId)) {
+      if (this.selectedItems.has(data[i].id)) {
         MODIFY_DATA.push(data[i]);
         data[i].hide = true;
       }
     }
+    this.sharedService.showToast("Moved records to modify");
   }
 }

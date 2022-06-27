@@ -1,12 +1,10 @@
 import { Injectable } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class SharedService {
-  constructor(private toast: MatSnackBar) {}
+  constructor() {}
   ngOnInit() {}
 
   showToast(message: string) {

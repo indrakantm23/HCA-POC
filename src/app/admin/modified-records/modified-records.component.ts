@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { MODIFY_DATA, MERGE_RECORDS } from "../shared/mocks";
-import { CommonApiService } from "../services/common-api.service";
-import { SharedService } from "../services/sharedService";
+import { MODIFY_DATA, MERGE_RECORDS } from "../../shared/mocks";
+import { CommonApiService } from "../../services/common-api.service";
+import { SharedService } from "../../services/sharedService";
 
 @Component({
   selector: "app-modified-records",
@@ -19,25 +19,21 @@ export class ModifiedRecordsComponent implements OnInit {
   ngOnInit(): void {}
 
   selectItem(event: any, item: any): void {
-    const value = event.target.value;
+    const value = Number(event.target.value);
     if (this.selectedItems.size === 2) {
       return;
     } else {
       if (this.selectedItems.has(value)) {
-        console.log("it has");
         this.selectedItems.delete(value);
       } else {
         this.selectedItems.add(value);
-        console.log("doesnt have");
         MERGE_RECORDS.push(item);
       }
     }
   }
 
   link() {
-    const data = this.data.filter((el: any) =>
-      this.selectedItems.has(el.mpiLinkId)
-    );
+    const data = this.data.filter((el: any) => this.selectedItems.has(el.id));
     const bodyData = {
       linkToSource: {
         name: data[0].sourceName,
@@ -50,18 +46,16 @@ export class ModifiedRecordsComponent implements OnInit {
     };
     this.commonApiService.link(bodyData).subscribe((res) => {
       this.sharedService.showToast("Linked records successfully.");
-      this.data = this.data.filter(
-        (el: any) => !this.selectedItems.has(el.mpiLinkId)
-      );
+      this.data = this.data.filter((el: any) => !this.selectedItems.has(el.id));
+      MODIFY_DATA.splice(0);
+      MODIFY_DATA.push(...data);
     });
   }
 
   unlink() {
-    const data = this.data.filter((el: any) =>
-      this.selectedItems.has(el.mpiLinkId)
-    );
+    const data = this.data.filter((el: any) => this.selectedItems.has(el.id));
     const bodyData = {
-      linkToSource: {
+      unlinkFromSource: {
         name: data[0].sourceName,
         id: data[0].sourceSystemId,
       },
@@ -72,44 +66,49 @@ export class ModifiedRecordsComponent implements OnInit {
     };
     this.commonApiService.unlink(bodyData).subscribe((res) => {
       this.sharedService.showToast("Unlinked records successfully.");
+      this.data = this.data.filter((el: any) => !this.selectedItems.has(el.id));
+      MODIFY_DATA.splice(0);
+      MODIFY_DATA.push(...data);
     });
   }
 
   merge() {
-    const data = this.data.filter((el: any) =>
-      this.selectedItems.has(el.mpiLinkId)
-    );
+    const data = this.data.filter((el: any) => this.selectedItems.has(el.id));
     const bodyData = {
-      linkToSource: {
+      toSurviveSource: {
         name: data[0].sourceName,
         id: data[0].sourceSystemId,
       },
-      source: {
+      toRetireSource: {
         name: data[1].sourceName,
         id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.merge(bodyData).subscribe((res) => {
       this.sharedService.showToast("Merged records successfully.");
+      this.data = this.data.filter((el: any) => !this.selectedItems.has(el.id));
+      MODIFY_DATA.splice(0);
+      MODIFY_DATA.push(...data);
     });
   }
 
   unmerge() {
-    const data = this.data.filter((el: any) =>
-      this.selectedItems.has(el.mpiLinkId)
-    );
+    const data = this.data.filter((el: any) => this.selectedItems.has(el.id));
     const bodyData = {
-      linkToSource: {
+      unmergeFromSource: {
         name: data[0].sourceName,
         id: data[0].sourceSystemId,
       },
-      source: {
+      unmergeSource: {
         name: data[1].sourceName,
         id: data[1].sourceSystemId,
       },
     };
     this.commonApiService.unmerge(bodyData).subscribe((res) => {
       this.sharedService.showToast("Unmerged records successfully.");
+      this.data = this.data.filter((el: any) => !this.selectedItems.has(el.id));
+      MODIFY_DATA.splice(0);
+      MODIFY_DATA.push(...data);
     });
   }
 }

@@ -12,17 +12,17 @@
                     <div class="right-move" *ngIf="selectedItems.size == 2">
                         <ul class="grid-right-ul">
                             <li class="align-self-center grid-border-right" data-bs-toggle="modal"
-                            data-bs-target="#linkModal"  (click)="link()"><img
-                                    src="../../../assets/images/link-icon.svg" class="icon-size">Link</li>
+                                data-bs-target="#linkModal"><img src="../../../assets/images/link-icon.svg"
+                                    class="icon-size">Link</li>
                             <li (click)="unlink()"><img src="../../../assets/images/unlink-icon.svg"
-                                    class="icon-size">Unlinks
+                                    class="icon-size">Unlink
                             </li>
                         </ul>
-                        
+
                         <ul class="grid-right-ul me-0">
                             <li class="align-self-center grid-border-right" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" (click)="merge()"><img
-                                    src="../../../assets/images/merge-icon.svg" class="icon-size1">Merge
+                                data-bs-target="#exampleModal"><img src="../../../assets/images/merge-icon.svg"
+                                    class="icon-size1">Merge
                             </li>
                             <li class="align-self-center" (click)="unmerge()"><img
                                     src="../../../assets/images/unmerge-icon.svg" class="icon-size2">Unmerge</li>
@@ -58,7 +58,7 @@
                             <tr *ngFor="let item of data">
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" [value]="item.mpiLinkId"
+                                        <input class="form-check-input" type="checkbox" [value]="item.id"
                                             id="flexCheckIndeterminate" (change)="selectItem($event, item)">
                                         <label class="form-check-label" for="flexCheckIndeterminate"></label>
                                     </div>
@@ -123,7 +123,7 @@
                         <tr *ngFor="let item of data">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" [value]="item.mpiLinkId"
+                                    <input class="form-check-input" type="checkbox" [value]="item.id"
                                         id="flexCheckIndeterminate">
                                     <label class="form-check-label" for="flexCheckIndeterminate"></label>
                                 </div>
@@ -146,7 +146,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Merge</button>
+                <button type="button" (click)="merge()" class="btn btn-primary">Merge</button>
             </div>
         </div>
     </div>
@@ -189,7 +189,7 @@
                         <tr *ngFor="let item of data">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" [value]="item.mpiLinkId"
+                                    <input class="form-check-input" type="checkbox" [value]="item.id"
                                         id="flexCheckIndeterminate">
                                     <label class="form-check-label" for="flexCheckIndeterminate"></label>
                                 </div>
@@ -212,7 +212,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Link</button>
+                <button type="button" (click)="link()" class="btn btn-primary">Link</button>
             </div>
         </div>
     </div>

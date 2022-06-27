@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { loginCreds, ErrorTypes } from "../shared/constants";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { CommonApiService } from "../services/common-api.service";
 import { AuthService } from "../services/auth.service";
@@ -18,8 +17,7 @@ export class LoginComponent implements OnInit {
     private commonApiService: CommonApiService,
     private authService: AuthService,
     private router: Router,
-    private sharedService: SharedService,
-    private _snackBar: MatSnackBar
+    private sharedService: SharedService
   ) {}
   public loginForm!: FormGroup;
   private errorType: string = "";

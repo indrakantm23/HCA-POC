@@ -1,7 +1,7 @@
 export const getAPIEndpoint = () => {
   const { location: { hostname: HOST_NAME = "" } = {} } = window || {};
   const DEV_URL =
-    "https://owiodvx3w1.execute-api.us-east-1.amazonaws.com/Prod/";
+    "https://rbi2mn6k9l.execute-api.us-east-1.amazonaws.com/Prod/";
   const QA_URL = "";
   const UAT_URL = "";
   const PREPROD_URL = "";
