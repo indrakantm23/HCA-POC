@@ -2,9 +2,9 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
 import { MainGridComponent } from "./admin/main-grid/main-grid.component";
-import { ModifiedRecordsComponent } from "./admin/modified-records/modified-records.component";
 import { AuthGuard } from "./services/auth.guard";
 import { NgxPermissionsGuard } from "ngx-permissions";
+import { AppComponent } from "./app.component";
 
 const routes: Routes = [
   {
@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
     path: "",
-    component: MainGridComponent,
+    component: AppComponent,
     canActivate: [AuthGuard],
     data: {
       breadcrumb: "Dashboard",
