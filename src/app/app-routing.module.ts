@@ -20,8 +20,6 @@ const routes: Routes = [
     },
   },
   { path: "login", component: LoginComponent },
-  { path: "user-grid", component: MainGridComponent },
-  { path: "modify-records", component: ModifiedRecordsComponent },
   {
     path: "",
     component: MainGridComponent,

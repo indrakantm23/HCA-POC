@@ -19,6 +19,7 @@ export class MainGridComponent implements OnInit {
   selectedItems: any = new Set();
   data: any;
   pageData: any;
+  totalRecords: number = 0;
 
   ngOnInit(): void {
     this.getIdentities(BODY_DATA);
@@ -32,6 +33,7 @@ export class MainGridComponent implements OnInit {
       .getIdeitities(pagNumber, recordsPerPage, body)
       .subscribe((res) => {
         const { data, pageNumber, recordsCount, recordsPerPage }: any = res;
+        this.totalRecords = recordsCount;
         this.data = data;
       });
   }

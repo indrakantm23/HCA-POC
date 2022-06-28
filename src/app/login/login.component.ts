@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           }: any = res;
           if (token) {
             this.authService.sendToken(firstName, lastName, token, roles);
-            this.router.navigate(["/user-grid"]);
+            this.router.navigate(["/admin/user-grid"]);
             this.sharedService.showToast("Logged in successfully");
           }
         },

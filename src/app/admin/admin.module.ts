@@ -5,6 +5,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "../shared/material/material.module";
 import { MainGridComponent } from "./main-grid/main-grid.component";
+import { ModifiedRecordsComponent } from "./modified-records/modified-records.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,13 @@ const routes: Routes = [
     component: MainGridComponent,
     data: {
       breadcrumb: "User Intities",
+    },
+  },
+  {
+    path: "modify-records",
+    component: ModifiedRecordsComponent,
+    data: {
+      breadcrumb: "Modify Records",
     },
   },
 ];

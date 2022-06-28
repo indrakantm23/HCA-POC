@@ -1,31 +1,31 @@
 <div class="left-nav">
     <h6 class="hello-user">Hello, {{getUserFirstName()}} <img src="../../../assets/images/hand-symbol.svg"></h6>
-    <ul class="leftnav-ul">
-        <a routerLink="/user-grid">
+    <ul class="leftnav-ul" *ngxPermissionsOnly="['Admin']">
+        <a routerLink="/admin/user-grid">
             <li routerLinkActive="leftnav-active">
                 <img src="../../../assets/images/dashboard-icon.svg">
                 Dashboard
             </li>
         </a>
-        <a routerLink="/modify-records">
+        <a routerLink="/admin/modify-records">
             <li routerLinkActive="leftnav-active">
                 <img src="../../../assets/images/modify-icon.svg">
                 Modify
             </li>
         </a>
-        <a routerLink="/reports">
+        <a routerLink="/admin/reports">
             <li routerLinkActive="leftnav-active">
                 <img src="../../../assets/images/reports-icon.svg">
                 Reports
             </li>
         </a>
-        <a routerLink="/settings">
+        <a routerLink="/admin/settings">
             <li routerLinkActive="leftnav-active">
                 <img src="../../../assets/images/settings-icon.svg">
                 Settings
             </li>
         </a>
-        <a routerLink="/help">
+        <a routerLink="/admin/help">
             <li routerLinkActive="leftnav-active">
                 <img src="../../../assets/images/help-icon.svg">
                 Help
