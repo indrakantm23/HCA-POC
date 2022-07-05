@@ -7,6 +7,12 @@ import { AppSettingsService } from "./app.settings.service";
   providedIn: "root",
 })
 export class CommonApiService implements OnInit {
+  private TOKEN: string = localStorage.getItem("token") || "";
+  private reqHeader = new HttpHeaders().set(
+    "Authorization",
+    "Bearer " + this.TOKEN
+  );
+
   public loginURL;
   public IdentitiesURL;
   public linkURL;
@@ -60,7 +66,9 @@ export class CommonApiService implements OnInit {
   }
   getIdeitities(pagNumber: number, recordsPerPage: number, data: any) {
     const cUrl = `${this.IdentitiesURL}?pagNumber=${pagNumber}&recordsPerPage=${recordsPerPage}`;
-    return this.http.post(cUrl, data);
+    return this.http.post(cUrl, data, {
+      headers: this.reqHeader,
+    });
   }
 
   // *************** GET API *********************//
@@ -68,19 +76,27 @@ export class CommonApiService implements OnInit {
   // *************** UPDATE API *********************//
   link(data: any) {
     const cUrl = `${this.linkURL}`;
-    return this.http.put(cUrl, data);
+    return this.http.put(cUrl, data, {
+      headers: this.reqHeader,
+    });
   }
   unlink(data: any) {
     const cUrl = `${this.unlinkURL}`;
-    return this.http.put(cUrl, data);
+    return this.http.put(cUrl, data, {
+      headers: this.reqHeader,
+    });
   }
   merge(data: any) {
     const cUrl = `${this.mergeURL}`;
-    return this.http.put(cUrl, data);
+    return this.http.put(cUrl, data, {
+      headers: this.reqHeader,
+    });
   }
   unmerge(data: any) {
     const cUrl = `${this.unmergeURL}`;
-    return this.http.put(cUrl, data);
+    return this.http.put(cUrl, data, {
+      headers: this.reqHeader,
+    });
   }
 
   // *************** DELETE API *********************//

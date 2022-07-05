@@ -14,7 +14,8 @@
 .project
 .classpath
 .c9/
-.angular/cache
+
+.angular/cache/
 *.launch
 /.angular
 .settings/

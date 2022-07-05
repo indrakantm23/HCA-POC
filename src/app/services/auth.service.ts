@@ -15,18 +15,12 @@ export class AuthService {
   // public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
-    private router: Router
-  ) // private permissionsService: NgxPermissionsService
-  {}
-  sendToken(
-    firstName: string,
-    lastName: string,
-    token: string,
-    roles: Roles[]
-  ) {
+    private router: Router // private permissionsService: NgxPermissionsService
+  ) {}
+  sendToken(firstName: string, lastName: string, token: string, role: Roles) {
     localStorage.setItem("LoggedInUser", `${firstName} ${lastName}`);
     localStorage.setItem("token", token);
-    localStorage.setItem("hcaRole", roles[0].name);
+    localStorage.setItem("hcaRole", role.name);
   }
   getToken() {
     return localStorage.getItem("LoggedInUser");

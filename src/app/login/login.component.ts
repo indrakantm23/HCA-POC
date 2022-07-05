@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { loginCreds, ErrorTypes } from "../shared/constants";
+import { loginCreds, ErrorTypes, getRouteByRoleId } from "../shared/constants";
 import { Router } from "@angular/router";
 import { CommonApiService } from "../services/common-api.service";
 import { AuthService } from "../services/auth.service";
@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   ) {}
   public loginForm!: FormGroup;
   private errorType: string = "";
+  public loading: boolean = false;
 
   ngOnInit(): void {
     this.initLoginForm();
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     if (this.loginForm.valid) {
+      this.loading = true;
       const data = this.loginForm.value;
       this.commonApiService.login(data).subscribe(
         (res) => {
@@ -43,16 +45,18 @@ export class LoginComponent implements OnInit {
             firstName,
             lastName,
             middleName,
-            roles,
+            role,
             token,
           }: any = res;
           if (token) {
-            this.authService.sendToken(firstName, lastName, token, roles);
-            this.router.navigate(["/admin/user-grid"]);
+            this.authService.sendToken(firstName, lastName, token, role);
+            this.router.navigate([`/${getRouteByRoleId(role.id)}/user-grid`]);
             this.sharedService.showToast("Logged in successfully");
+            this.loading = false;
           }
         },
         (err) => {
+          this.loading = false;
           const { error }: any = err;
           if (error) {
             this.sharedService.showToast(error);

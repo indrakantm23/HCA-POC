@@ -41,39 +41,28 @@ const routes: Routes = [
           import("./admin/admin.module").then((m) => m.AdminModule),
       },
       {
-        path: "user",
+        path: "viewer",
         canActivateChild: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ["User"],
+            only: ["Viewer"],
             redirectTo: "/login",
           },
         },
-        loadChildren: () => import("./app.module").then((m) => m.AppModule),
+        loadChildren: () =>
+          import("./viewer/viewer.module").then((m) => m.ViewerModule),
       },
       {
-        path: "consultant",
+        path: "source",
         canActivateChild: [NgxPermissionsGuard],
         data: {
           permissions: {
-            only: ["Consultant"],
+            only: ["SourceUser"],
             redirectTo: "/login",
           },
         },
-        children: [
-          {
-            path: "",
-            redirectTo: "dashboard",
-            pathMatch: "full",
-          },
-          {
-            path: "dashboard",
-            component: MainGridComponent,
-            data: {
-              breadcrumb: "Dashboard",
-            },
-          },
-        ],
+        loadChildren: () =>
+          import("./source/source.module").then((m) => m.SourceModule),
       },
     ],
   },

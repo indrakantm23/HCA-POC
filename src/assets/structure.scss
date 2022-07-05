@@ -219,3 +219,35 @@ a {
     opacity: 0;
   }
 }
+
+// LOADER
+.loader {
+  border: 5px solid #ccc;
+  border-radius: 50%;
+  border-top: 5px solid #111;
+  width: 60px;
+  height: 60px;
+  animation: spin 0.7s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
